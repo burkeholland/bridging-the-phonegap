@@ -1,0 +1,71 @@
+#dark-theme .km-navbar {
+	background-color: #111;
+}
+
+.km-ios .km-insetcontent {
+	background-image: url("images/bg.gif");
+}
+
+#tabstrip-profile h2 {
+        display: inline-block;
+        font-size: 1.1em;
+        margin: 1.5em 0 0 1em;
+    }
+    #tabstrip-profile h2 span {
+        display: block;
+        clear: both;
+        font-size: 2em;
+        margin: .2em 0 0 0;
+    }
+    #tabstrip-profile img {
+        width: 5em;
+        height: 5em;
+        float: left;
+        margin: 1em;
+        -webkit-box-shadow: 0 1px 3px #333;
+        box-shadow: 0 1px 3px #333;
+        -webkit-border-radius: 8px;
+        border-radius: 8px;
+    }
+
+.small {
+	font-size: .5em;
+}
+
+.medium {
+	font-size: .6em;
+	line-height: 10px;
+}
+
+.big {
+	font-size: 1.5em;
+}
+
+.orange {
+	color: #F47A00;
+}
+
+.blue {
+	color: #C5DBF8;
+}
+
+.story {
+	margin: 0px 0px 0px 0px;
+	display: -webkit-box;
+	box-orient: horizontal;
+}
+
+.points {
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	width: 50px;
+	text-align: center;
+}
+
+.link {
+	margin-left: 10px;
+	line-height: 1.1em;
+	font-size: .7em;
+	color: gray;
+}

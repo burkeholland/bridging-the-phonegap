@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title></title>
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+	<meta charset="utf-8">
+
+	<link rel="stylesheet" href="kendo.mobile.all.min.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+
+	<script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>
+
+	<!-- iPad/iPhone specific css below, add after your main css >
+	<link rel="stylesheet" media="only screen and (max-device-width: 1024px)" href="ipad.css" type="text/css" />		
+	<link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="iphone.css" type="text/css" />		
+	-->
+	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
+	<script type="text/javascript" charset="utf-8" src="cordova-1.5.0.js"></script>
+	<script type="text/javascript" charset="utf-8" src="ChildBrowser.js"></script>
+	<script type="text/javascript" charset="utf-8" src="TwitterPlugin.js"></script>
+  	<script src="jquery.min.js"></script>
+  	<script src="kendo.all.min.js"></script>
+  	<script src="app.js"></script>
+    <script type="text/javascript">
+
+
+	// If you want to prevent dragging, uncomment this section
+	/*
+	function preventBehavior(e) 
+	{ 
+      e.preventDefault(); 
+    };
+	document.addEventListener("touchmove", preventBehavior, false);
+	*/
+	
+	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+	for more details -jm */
+	/*
+	function handleOpenURL(url)
+	{
+		// TODO: do something with the url passed in.
+	}
+	*/
+	
+	function onBodyLoad()
+	{		
+		document.addEventListener("deviceready", onDeviceReady, false);
+	}
+	
+	/* When this function is called, Cordova has been initialized and is ready to roll */
+	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+	for more details -jm */
+	function onDeviceReady()
+	{
+		app.init();
+	}
+    
+    </script>
+  </head>
+	<body onload="onBodyLoad()">
+
+		<div data-role="view" data-layout="main-layout" id="hot">
+			<ul id="popular_news" data-role="listview" data-template="template" 
+				data-style="inset" data-source="app.tmp" data-pull-to-refresh="true"></ul>
+		</div>
+		<div data-role="view" data-layout="main-layout" id="new"></div>
+		<div data-role="view" data-layout="main-layout" id="drama"></div>
+		<div data-role="view" data-layout="main-layout" id="settings">
+			<h2>Select A Reddit</h2>
+			<ul id="select-a-reddit" data-role="listview"></ul>
+		</div>
+
+
+		<div id="dark-theme" data-role="layout" data-id="main-layout" data-title="Reddit Browser">
+	      	<div data-role="header">
+				<div data-role="navbar"><img src="images/header.png" />Reddit Hotness</div>	
+			</div>
+			<div data-role="footer">
+				<div data-role="tabstrip" id="tabstrip">
+					<a data-icon="favorites" href="#hot">Hot</a>
+                    <a data-icon="mostrecent" href="#new">New</a>
+                    <a data-icon="trash" href="#drama">Drama</a>
+					<a data-icon="settings" href="#settings">Settings</a>
+				</div>
+			</div>
+		</div>
+
+		<script id="template" type="text/x-kendo-template">
+			# if ( data.title.length > 60 ) {
+				data.title = data.title.substring(0,60) + "..."
+			} #
+			<div class="story">
+				<div class="points">
+					<div>
+		 				<div class="big blue">#= score #</div>
+						# if (app.hasTwitter) { #
+							<a class="tweet-button" data-title="#= title #" data-url="#= url #">
+								<img src="images/tweet.png" />
+							</a>
+						# } #
+		    		</div>
+				</div>
+				<div class="link">
+					<div class="middle">
+						<span class="story-link" data-url="#= url #">#= title #</span>
+					</div>
+				</div>
+			</div>
+		  </script>
+	</body>
+
+</html>
