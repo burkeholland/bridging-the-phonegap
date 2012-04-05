@@ -6,8 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
 	<meta charset="utf-8">
 
-	<link rel="stylesheet" href="kendo.mobile.all.min.css" type="text/css" media="screen" />
-	<link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="styles/kendo/kendo.mobile.all.min.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="styles/style.css" type="text/css" media="screen" />
+	<link rel="stylesheet" href="styles/bootstrap/css/bootstrap.min.css" type="text/css" media="screen" title="no title" charset="utf-8">
 
 	<script src="http://localhost:8080/target/target-script-min.js#anonymous"></script>
 
@@ -17,11 +18,11 @@
 	-->
 	<!-- If your application is targeting iOS BEFORE 4.0 you MUST put json2.js from http://www.JSON.org/json2.js into your www directory and include it here -->
 	<script type="text/javascript" charset="utf-8" src="cordova-1.5.0.js"></script>
-	<script type="text/javascript" charset="utf-8" src="ChildBrowser.js"></script>
-	<script type="text/javascript" charset="utf-8" src="TwitterPlugin.js"></script>
-  	<script src="jquery.min.js"></script>
-  	<script src="kendo.all.min.js"></script>
-  	<script src="app.js"></script>
+	<script type="text/javascript" charset="utf-8" src="plugins/ChildBrowser.js"></script>
+	<script type="text/javascript" charset="utf-8" src="plugins/TwitterPlugin.js"></script>
+  	<script src="javascripts/jquery.min.js"></script>
+  	<script src="javascripts/kendo.all.min.js"></script>
+  	<script src="javascripts/app.js"></script>
     <script type="text/javascript">
 
 
@@ -64,19 +65,20 @@
 
 		<div data-role="view" data-layout="main-layout" id="hot">
 			<ul id="popular_news" data-role="listview" data-template="template" 
-				data-style="inset" data-source="app.tmp" data-pull-to-refresh="true"></ul>
+				data-style="inset" data-source="app.reddit" data-pull-to-refresh="true"></ul>
 		</div>
 		<div data-role="view" data-layout="main-layout" id="new"></div>
 		<div data-role="view" data-layout="main-layout" id="drama"></div>
 		<div data-role="view" data-layout="main-layout" id="settings">
-			<h2>Select A Reddit</h2>
-			<ul id="select-a-reddit" data-role="listview"></ul>
+			<h2 class="white">Select A Reddit</h2>
+			<ul id="select_reddit" data-role="listview" data-template="reddits" 
+				data-style="inset" data-source="app.reddits"></ul>
 		</div>
 
 
-		<div id="dark-theme" data-role="layout" data-id="main-layout" data-title="Reddit Browser">
+		<div id="dark-theme" data-role="layout" data-id="main-layout" data-title="Reddit Browser" id="the_app">
 	      	<div data-role="header">
-				<div data-role="navbar"><img src="images/header.png" />Reddit Hotness</div>	
+				<div data-role="navbar"><img src="styles/images/header.png" data-bind="value: title" /></div>	
 			</div>
 			<div data-role="footer">
 				<div data-role="tabstrip" id="tabstrip">
@@ -87,6 +89,10 @@
 				</div>
 			</div>
 		</div>
+		
+		<script type="text/x-kendo-template" id="reddits">
+			<a data-url="#= url #" class="select-reddit">#= display_name #</a>
+		</script>
 
 		<script id="template" type="text/x-kendo-template">
 			# if ( data.title.length > 60 ) {
@@ -97,9 +103,7 @@
 					<div>
 		 				<div class="big blue">#= score #</div>
 						# if (app.hasTwitter) { #
-							<a class="tweet-button" data-title="#= title #" data-url="#= url #">
-								<img src="images/tweet.png" />
-							</a>
+							<button class="btn tweet-button" data-title="#= title #" data-url="#= url #">Tweet</button>
 						# } #
 		    		</div>
 				</div>
